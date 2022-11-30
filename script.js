@@ -1,84 +1,43 @@
 /*
-Using if statements, create a rock, paper, scissors game.
-
-https://wrpsa.com/the-official-rules-of-rock-paper-scissors/
-
-You may use any method of user input and any method of visualisation (alerts, document.getElement etc), as you will be marked on the JavaScript logic around your if statements
-
+This is a javascript application that captures how many subjects a user studies. It then asks the user to enter the results for each subject. It stores these results in an array and prints them back to the user along with their overall average and grade for each module.
 J Lindsay
-15/11/2022
+29/11/2022
 */
-function game(){
-	var name=document.getElementById("formName").value;
-	var userGuess=document.getElementById("formGuess").value;
-	var randomNumber = Math.floor(Math.random() * 3) + 1;
-	var computerGuess;
-	//console.log(randomNumber);
-	if(randomNumber=1){
-		computerGuess="ROCK";
-	}
-	else if(randomNumber=2){
-		computerGuess="PAPER";
-	}
-	else if(randomNumber=3){
-		computerGuess="SCISSORS";
-	}
-	else{
-		computerGuess="error";
-	}
-	//console.log(computerGuess);
-	
-	if(userGuess.toUpperCase()=="ROCK"){
-		if(computerGuess=="ROCK"){
-			document.getElementById("rockPaper").innerHTML=name+" - It's a draw! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
+var numberOfSubjects;
+let result=[];
+let grade=[];
+var sum=0;
+var averageResult;
+function results(){
+	numberOfSubjects=prompt("Hello! Please enter how many subjects you study:");
+	console.log(numberOfSubjects);
+	for(i=0;i<numberOfSubjects;i++){
+		result[i]=parseFloat(prompt("Please insert your result for subject number "+(i+1)));
+		if(result[i]>=70){
+     			grade[i]="A";
+  		}
+  		else if(result[i]<70&&result[i]>=60){
+     			grade[i]="B";
+  		}
+  		else if(result[i]<60&&result[i]>=50){
+     			grade[i]="C";
 		}
-		else if(computerGuess=="PAPER"){
-			document.getElementById("rockPaper").innerHTML=name+" - You Lose! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
+  		else if(result[i]<50&&result[i]>=45){
+     			grade[i]="D";
 		}
-		else if(computerGuess=="SCISSORS"){
-			document.getElementById("rockPaper").innerHTML=name+" - You Win! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
+		else if(result[i]<45&&result[i]>=40){
+		     	grade[i]="E";
 		}
-		else{
-			document.getElementById("rockPaper").innerHTML=name+" - Oops, something went wrong! - You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
+		else if(result[i]<40){
+		     	grade[i]="F";
 		}
-		hide();
-	}
-	else if(userGuess.toUpperCase()=="PAPER"){
-		if(computerGuess=="ROCK"){
-			document.getElementById("rockPaper").innerHTML=name+" - You Win! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else if(computerGuess=="PAPER"){
-			document.getElementById("rockPaper").innerHTML=name+" - It's a draw! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else if(computerGuess=="SCISSORS"){
-			document.getElementById("rockPaper").innerHTML=name+" - You Lose! You produced "+userGuess.toUpperCase().toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else{
-			document.getElementById("rockPaper").innerHTML=name+" - Oops, something went wrong! - You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		hide();
-	}
-	else if(userGuess.toUpperCase()=="SCISSORS"){
-		if(computerGuess=="ROCK"){
-			document.getElementById("rockPaper").innerHTML=name+" - You Lose! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else if(computerGuess=="PAPER"){
-			document.getElementById("rockPaper").innerHTML=name+" - You win! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else if(computerGuess=="SCISSORS"){
-			document.getElementById("rockPaper").innerHTML=name+" - It's a draw! You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		else{
-			document.getElementById("rockPaper").innerHTML=name+" - Oops, something went wrong! - You produced "+userGuess.toUpperCase()+" and the computer produced "+computerGuess;
-		}
-		hide();
-	}
-	else{
-		alert("Sorry, that is not a valid input!");
-	}
-	document.getElementById("playAgain").innerHTML="Press F5 to play again :)";
-}//close function game
-
-function hide(){
-	document.getElementById("button").style.visibility="hidden";
+		sum+=result[i];
+		//console.log(sum);
+	}//exit for loop
+	//console.log(sum);
+	averageResult=sum/result.length;
+	//console.log(averageResult);
+	document.getElementById("line1").innerHTML="Results:";
+	document.getElementById("line2").innerHTML="Your average result is "+averageResult.toFixed(2)+"%";
+	document.getElementById("line3").innerHTML="Your grades for each subject are as follows: "+grade.toString();
 }
